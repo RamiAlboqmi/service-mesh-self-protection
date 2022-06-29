@@ -1,5 +1,5 @@
 # Service-mesh-self-protection
-This repository helps us to share our source code for the research paper "Toward Enabling Self-Protection Ability to Service Mesh Layer in Microservice Architecture".
+This repository helps us to share our source code with the research community for the research paper "Toward Enabling Self-Protection Ability to Service Mesh Layer in Microservice Architecture".
 
 In order to apply our approach with the same experiment we did, please watch this YouTube video (URL) which we will do the following steps: 
 1. Install kubernetes and docker (you might follow Docker.com guideline on the URL: https://docs.docker.com/desktop/ )
