@@ -1,0 +1,23 @@
+#### bad request
+{(numOfReq;>3;(null,user request per second more than 3);Log analysis result of  numOfReq;""),
+(newUser;false;(null,false for authorized credential with previous history);Search result userInfo log;"")} blocked
+
+{(numOfReq;>3;(null,user request per second more than 3);Log analysis result of  numOfReq;""),
+(newUser;true;(null,true for authorized credential without previous history);Search result userInfo log;"")} blocked
+
+### suspecious request
+{(numOfReq;>1 and <=3;(null,user request per second greater than 1 and less than 3);Log analysis result of  numOfReq;""),
+(newUser;false;(null,false for authorized credential with previous history);Search result userInfo log;"")} v1
+
+{(numOfReq;>1 and <=3;(null,user request per second greater than 1 and less than 3);Log analysis result of  numOfReq;""),
+(newUser;true;(null,true for authorized credential without previous history);Search result userInfo log;"")} blocked (never happpen)
+
+## good request but new user
+{(numOfReq;=1;(null,user request per second is 1);Log analysis result of  numOfReq;""),
+(newUser;true;(null,true for authorized credential without previous history);Search result userInfo log;"")} v2
+
+
+## good request and old user
+
+{(numOfReq;=1;(null,user request per second is 1);Log analysis result of  numOfReq;""),
+(newUser;false;(null,false for authorized credential with previous history);Search result userInfo log;"")} V3

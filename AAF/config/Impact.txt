@@ -1,0 +1,7 @@
+numOfReq;greater than 3;0.2
+numOfReq;greater than 1 and less than equal 3;0.5
+numOfReq;equal 1;1.0
+authUser;non authorized;0.0
+authUser; authorized credential;1.0
+newUser;true;0.9
+newUser;false;1.0
