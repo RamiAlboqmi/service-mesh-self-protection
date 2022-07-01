@@ -1,0 +1,52 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: save-data
+  namespace: istio-system 
+spec:
+  configPatches:
+  
+  - applyTo: HTTP_FILTER
+    match:
+      context: GATEWAY
+      listener:
+        filterChain:
+          filter:
+            name: "envoy.filters.network.http_connection_manager"
+            subFilter:
+              name: "envoy.filters.http.router"
+    patch:
+      operation: INSERT_BEFORE
+      value:
+        name: envoy.lua
+        typed_config:
+          "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
+          inlineCode: |
+            function envoy_on_request(request_handle)
+            
+             local values = tostring(request_handle:headers():get("x-request-id"))  .."/" ..   tostring(request_handle:headers():get("X-Forwarded-For")) 
+             local url = "aaf.default.svc.cluster.local"
+
+             local cluster = "outbound|8080||" .. url
+             local request_headersVals = {
+              [":method"] = "GET",
+              [":path"] = "/Save/" .. values,
+              [":authority"] = url
+              }
+
+             local request_body = ""
+             local timeout = 1000 --ms
+             local response_headersVals, response_bodyVal = request_handle:httpCall(
+              cluster,
+              request_headersVals,
+              request_body,
+              timeout
+              )
+           
+             local decision = tostring(response_bodyVal)
+             request_handle:logErr("Saved..")
+           
+            end
+
+            
+
