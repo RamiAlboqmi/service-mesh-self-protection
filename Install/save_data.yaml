@@ -1,11 +1,13 @@
+# This YAML file helps to connect to AAF service and store current request.
+# This gets applied on each GATEWAY connection
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: save-data
-  namespace: istio-system 
+  namespace: istio-system
 spec:
   configPatches:
-  
+
   - applyTo: HTTP_FILTER
     match:
       context: GATEWAY
@@ -23,8 +25,11 @@ spec:
           "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
           inlineCode: |
             function envoy_on_request(request_handle)
-            
-             local values = tostring(request_handle:headers():get("x-request-id"))  .."/" ..   tostring(request_handle:headers():get("X-Forwarded-For")) 
+
+             local requesid = tostring(request_handle:headers():get("x-request-id"))
+             local userip = tostring(request_handle:headers():get("X-Forwarded-For"))
+             local values = requesid  .."/" ..   userip
+
              local url = "aaf.default.svc.cluster.local"
 
              local cluster = "outbound|8080||" .. url
@@ -42,11 +47,8 @@ spec:
               request_body,
               timeout
               )
-           
+
              local decision = tostring(response_bodyVal)
              request_handle:logErr("Saved..")
-           
+
             end
-
-            
-
