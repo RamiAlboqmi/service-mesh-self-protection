@@ -1,3 +1,5 @@
+# This YAML file helps each sidecar in the cluster to call our AAF service to get current user confidence @runtime. 
+# This gets applied on each SIDECAR_OUTBOUND.
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
