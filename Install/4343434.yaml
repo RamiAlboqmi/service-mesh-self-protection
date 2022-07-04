@@ -1,3 +1,4 @@
+save_data.yaml
 # This YAML file helps to connect to AAF service and store current request.
 # This gets applied on each GATEWAY connection
 apiVersion: networking.istio.io/v1alpha3
@@ -26,29 +27,29 @@ spec:
           inlineCode: |
             function envoy_on_request(request_handle)
 
-             local requesid = tostring(request_handle:headers():get("x-request-id"))
+             local requestid = tostring(request_handle:headers():get("x-request-id"))
              local userip = tostring(request_handle:headers():get("X-Forwarded-For"))
              local values = requesid  .."/" ..   userip
 
-             local url = "aaf.default.svc.cluster.local"
+             local service_url = "aaf.default.svc.cluster.local"
 
-             local cluster = "outbound|8080||" .. url
-             local request_headersVals = {
+             local cluster_url = "outbound|8080||" .. service_url
+             local request_headers_values = {
               [":method"] = "GET",
               [":path"] = "/Save/" .. values,
-              [":authority"] = url
+              [":authority"] = service_url
               }
 
-             local request_body = ""
-             local timeout = 1000 --ms
-             local response_headersVals, response_bodyVal = request_handle:httpCall(
-              cluster,
-              request_headersVals,
-              request_body,
-              timeout
+             local request_body_values = ""
+             local timeout_value = 1000
+             local response_headers_values, response_body_values = request_handle:httpCall(
+              cluster_url,
+              request_headers_values,
+              request_body_values,
+              timeout_value
               )
 
-             local decision = tostring(response_bodyVal)
-             request_handle:logErr("Saved..")
+             local decision = tostring(response_body_values)
+             request_handle:logDebug("Saved..")
 
             end
