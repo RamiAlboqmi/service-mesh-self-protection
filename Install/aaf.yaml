@@ -1,0 +1,51 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: aaf
+  namespace: istio-system
+  labels:
+    app: aaf
+    service: aaf
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: aaf
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aaf
+  namespace: istio-system
+  labels:
+    app: aaf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aaf
+  template:
+    metadata:
+      labels:
+        app: aaf
+    spec:
+      containers:
+      - name: aaf
+        image: rami966/sp2022:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+          - name: DB_HOST
+            value: mysql
+          - name: DB_NAME
+            value: storeservicerequest
+          - name: DB_USERNAME
+            value: root
+          - name: DB_PASSWORD
+            value: rootrootroot
+      imagePullSecrets:
+      - name: regcred
+
