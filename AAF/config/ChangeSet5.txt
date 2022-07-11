@@ -1,0 +1,2 @@
+{(numOfReq;equal 1;(null,user request per second is 1);Log analysis result of  numOfReq;"")
+(newUser;true;(null,true for authorized credential without previous history);Search result userInfo log;"")}
