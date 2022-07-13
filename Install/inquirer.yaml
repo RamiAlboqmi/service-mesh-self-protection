@@ -24,7 +24,7 @@ spec:
           inlineCode: |
             function envoy_on_request(request_handle)
 
-             local service_service_url = "aaf.istio-system.svc.cluster.local"
+             local service_url = "aaf.istio-system.svc.cluster.local"
              local cluster_url = "outbound|8080||" .. service_url
              local request_headers_values = {
               [":method"] = "GET",
