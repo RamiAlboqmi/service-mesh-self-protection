@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><GSN><Context identifier="AC-4 [1]" statement="Context: AC-4 [1]: Assignment: iFlowPolicy =  {policyOfAccessControl, policyOfInfoFlowEnforcement}" tailoring="iFlowPolicy =  {policyOfAccessControl, policyOfInfoFlowEnforcement}"/>
+<Solution assessment=" Log analysis result of  numOfReq" identifier="MSn1-1" statement="Solution: MSn1-1:  Log analysis result of  numOfReq" provision="numOfReq" cond="greater than 3" impactFactor = "0.2"/>
+<Solution assessment=" Log analysis result of  numOfReq" identifier="MSn1-2" statement="Solution: MSn1-1:  Log analysis result of  numOfReq" provision="numOfReq" cond="greater than 1 and less than equal 3" impactFactor = "0.5"/>
+<Solution assessment=" Log analysis result of  numOfReq" identifier="MSn1-3" statement="Solution: MSn1-1:  Log analysis result of  numOfReq" provision="numOfReq" cond="equal 1" impactFactor = "1.0"/>
+<Solution assessment=" Search result userInfo log" identifier="MSn2-1" statement="Solution: MSn1-2:  Search result userInfo log" provision="newUser" cond="true" impactFactor = "0.9"/>
+<Solution assessment=" Search result userInfo log" identifier="MSn2-2" statement="Solution: MSn1-2:  Search result userInfo log" provision="newUser" cond="false" impactFactor = "1.0"/>
+<MainGoal achievement_weight="1" baseline_allocation="high" control_action="enforces approved authorizations for controlling the flow of information within the system and between connected systems based on information flow control policies" family="AC" identifier="AC-4 Main" implemented_by="information system" number="4" provision_set="val(appAuth),val(infoSys)" statement="Goal: AC-4 AC-4 Main Main: information system enforces approved authorizations for controlling the flow of information within the system and between connected systems based on information flow control policies; Impact = high, Provides= [ val(appAuth),val(infoSys)]; aw = 1"/><ReqGoal achievement_weight="1" assessment_process="security compliance confidence assessment process" functional_requirement="provides confidence value based on user request assessment" identifier="AC-4 Req1" statement="Goal: AC-4 Req1: security compliance confidence assessment process maintains provides confidence value based on user request assessment; aw = 1"/><OpGoal achievement_weight="1" condition="user request per second no more than 3" identifier="M1 G-1" statement="Goal: M1 G-1: Variables = numOfReq; Condition = user request per second no more than 3; aw = 1" variable="numOfReq"/><OpGoal achievement_weight="1" condition="authorized credential" identifier="M1 G-2" statement="Goal: M1 G-2: Variables = authUser; Condition = authorized credential; aw = 1" variable="authUser"/><OpGoal achievement_weight="1" condition="flag for authorized credential without previous history" identifier="M1 G-3" statement="Goal: M1 G-3: Variables = newUser; Condition = flag for authorized credential without previous history; aw = 1" variable="newUser"/><Strategy assessment_Process="security compliance confidence assessment process " identifier="S1" statement="Strategy: S1: Argument over security compliance confidence assessment process "/><InContextOf destination="AC-4[1]" source="AC-4 Main"/>
+<SupportedBy destination="S1" source="AC-4 Main"/>
+<SupportedBy destination="AC-4 Req1" source="S1"/>
+<SupportedBy destination="M1 G-1" source="AC-4 Req1"/>
+<SupportedBy destination="M1 G-2" source="AC-4 Req1"/>
+<SupportedBy destination="M1 G-3" source="AC-4 Req1"/>
+<SupportedBy destination="MSn1-1" source="M1 G-1"/>
+<SupportedBy destination="MSn1-2" source="M1 G-1"/>
+<SupportedBy destination="MSn1-3" source="M1 G-1"/>
+<SupportedBy destination="MSn2-1" source="M1 G-2"/>
+<SupportedBy destination="MSn2-1" source="M1 G-3"/>
+<SupportedBy destination="MSn2-2" source="M1 G-2"/>
+<SupportedBy destination="MSn2-2" source="M1 G-3"/>
+</GSN>
