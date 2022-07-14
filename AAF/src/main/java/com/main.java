@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class main {
 // Add a processor values then pass it.
 @Autowired
-private UserRepository userR;
+private StoreservicerequestRepository userR;
 
 
 // This return the user_ip address after provide the request_id. If found, return it.
