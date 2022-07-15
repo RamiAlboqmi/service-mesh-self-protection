@@ -1,8 +1,8 @@
-FROM openjdk:17-jdk-slim-buster
+FROM openjdk:18-jdk-slim-buster
 
 EXPOSE 8080
 
 ADD config /config
-ADD target/rami-0.0.1-SNAPSHOT.jar rami.jar
-
-ENTRYPOINT ["java","-jar","rami.jar"]
+ADD target/AAF-0.0.1-SNAPSHOT.jar AAF.jar
+ 
+ENTRYPOINT ["java","-jar","AAF.jar"]  
